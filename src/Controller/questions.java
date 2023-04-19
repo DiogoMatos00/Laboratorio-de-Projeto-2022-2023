@@ -1,5 +1,4 @@
-// main
-// CRIAR UMA CONEXÂO CADA VEZ Q QUEREMOS ALGO DA BASE DE DADOS?
+// CRIAR UMA CONEXÂO CADA VEZ Q QUEREMOS ALGO DA BASE DE DADOS <- Sim
 
 
 package Controller;
@@ -37,8 +36,8 @@ public class questions {
         //Pegar numa questão pelo id e dar delete
     }
 
-    static void getAll(){
-        //conseguir informação basica de todas as questões
+    static void getAll(String Subject){
+        //conseguir informação basica de todas as questões De uma cadeira ( Conseguir X Querries q quando chegamos a ultima dá-mos load a mais x.) <- VER ISTO
 
         // ########################
         // Conexão à base de dados
@@ -50,5 +49,9 @@ public class questions {
 
         // ########################
         // Conexão à base de dados
+    }
+
+    static void getCustom(Hashtable<String,String> Filter){
+        // Exprimental <- Conseguir todas as perguntas q respondam aos critérios de um filtro. Ver como fazer isto.
     }
 }
