@@ -39,8 +39,7 @@ public class questions {
                     List<String> row = answer.get(i);
                     String choice = row.get(0); // question's answer
                     Boolean val = Boolean.parseBoolean(row.get(1)); // Bool to check if it is "Escolha múltipla" or "Resposta Múltipla "
-                    Boolean torf = Boolean.parseBoolean(row.get(2)); // Bool to check if a answer is true or false.
-                    
+                    Boolean torf = Boolean.parseBoolean(row.get(2)); // Bool to check if a answer is true or false.   
 
                     connection.execute_query(conn, String.format("INSERT INTO MULTIPLECHOICE VALUES((%s, %b, %b, %s);", choice, val, torf, id));
                 }
@@ -72,12 +71,15 @@ public class questions {
                 break;
 
             case "Resposta Calculada":
-                // VER COMO o parametro answer estara configurado para tratar os dados.
-                //Duvida
-                // FALAR COM O PROF
+                Integer n_values = Integer.parseInt((String) answer.get("n_values").get(0));
+                for (int i = 0; i < n_values; i++){
+                    List<String> row = answer.get(i);
+                    String valA = row.get(0);
+                    String valB = row.get(1);
+                    String buffer = row.get(2);
 
-                //INSERT INTO CALCULATEDQ VALUES ('80640', '4'); 
-
+                    connection.execute_query(conn, String.format("INSERT INTO VALUES_C VALUES(%s, %s, %s, %s);", valA, valB, buffer, id));
+                }
         }
 
         connection.disconnect(conn);
