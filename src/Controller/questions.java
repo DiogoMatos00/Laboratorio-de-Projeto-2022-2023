@@ -112,17 +112,22 @@ public class questions {
         // Conexão à base de dados
         Connection conn = connection.connect();
         connection.execute_query(conn, String.format("DELETE FROM Question WHERE id = %s;", id));
+        connection.disconnect(conn);
 
         // Pegar numa questão pelo id e dar delete
     }
 
-    static void getAll(String Subject) {
+    static ResultSet getAll(String Subject) {
         // conseguir informação basica de todas as questões De uma cadeira ( Conseguir X
         // Querries q quando chegamos a ultima dá-mos load a mais x.) <- VER ISTO
 
         // ########################
         // Conexão à base de dados
+        Connection conn = connection.connect();
+        ResultSet result = connection.execute_query(conn, String.format("SELECT * FROM Question;"));
+        connection.disconnect(conn);
 
+        return result;
     }
 
     static void getQuestion(String id) {
