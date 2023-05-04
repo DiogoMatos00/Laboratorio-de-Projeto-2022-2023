@@ -99,6 +99,7 @@ public class questions {
         // ########################
         // Conexão à base de dados
 
+
         // Pegar na hashtable e ver o q foi alterado e mudar para a base de dados. (ex:
         // checkar a key e mudar no respeito para a base de dados se não houver key não
         // há alterações).
@@ -109,6 +110,8 @@ public class questions {
 
         // ########################
         // Conexão à base de dados
+        Connection conn = connection.connect();
+        connection.execute_query(conn, String.format("DELETE FROM Question WHERE id = %s;", id));
 
         // Pegar numa questão pelo id e dar delete
     }
