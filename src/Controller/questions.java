@@ -93,12 +93,27 @@ public class questions {
         // }
     }
 
-    static void editQuestion(String id, Hashtable<String, String> changes) {
+    static void editQuestion(String id, Hashtable<String, String> changes) throws SQLException {
         // Descrição do q acontece aqui
 
         // ########################
         // Conexão à base de dados
+        Connection conn = connection.connect();
+        
+        String query = String.format("SELECT Type FROM Question WHERE id=%s;", id);
 
+        String topic = connection.execute_query(conn, query).getString(1);
+
+        switch(topic){
+
+        }
+
+
+
+        // SELECT DISTINCT TABLE_NAME 
+        // FROM INFORMATION_SCHEMA.COLUMNS
+        // WHERE COLUMN_NAME IN ('Product')
+        //     AND TABLE_SCHEMA='YourDatabase';
 
         // Pegar na hashtable e ver o q foi alterado e mudar para a base de dados. (ex:
         // checkar a key e mudar no respeito para a base de dados se não houver key não
