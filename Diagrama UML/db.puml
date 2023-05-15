@@ -1,0 +1,62 @@
+@startuml
+class Question{
+    * **String id**
+    **String Description**
+    **String Difficulty level**
+    **String Type**
+}
+
+class Topic{
+    * **String Question_id <FK>**
+    **String Topic** Unique
+}
+
+class Subject{
+    * **String Question_id <FK>**
+    **String Subject** Unique
+}
+
+class Development{
+    * **String Question_id <FK>**
+    **String answer_placeholder**
+}
+
+class shortAnswer{
+    * **String Question_id <FK>**
+    **String answer**
+}
+
+class MultipleChoice{
+    * **String Question_id <FK>**
+    **String Answer**
+    **Bool Value**
+    **Bool isTrueOrFalse**
+}
+
+class calculatedQ{
+    * **String Question_id <FK>**
+    **Numbers Formula**
+}
+
+class calculatedQValues{
+    * **String Question_id <FK>**
+    **String Value**
+    **Int ValA**
+    **Int ValB**
+    **Int Range**
+}
+
+class MatchTheFollowing{
+    * **String Question_id <FK>**
+    **String Left**
+    **String Right**
+}
+
+Subject }----{ Question
+Topic }----{ Question
+Question --{ Development
+Question ----{ MultipleChoice
+Question --{ MatchTheFollowing
+Question ---- shortAnswer
+Question ----{ calculatedQ
+Question ----{ calculatedQValues
