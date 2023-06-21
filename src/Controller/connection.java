@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class connection {
     
-    static Connection connect(){
+    public static Connection connect(){
         /*
          * Connection to database. It will use a username and a password all together with the db url in this case is localhost:3306/projeto.
          * It Will return a Connection from java.sql
@@ -31,7 +31,7 @@ public class connection {
         }
     }
 
-    static void disconnect(Connection conn){
+    public static void disconnect(Connection conn){
         /*
          * Disconnect to a database. It will get a Connection from java.sql and disconnect.
          * It will not return anything.
@@ -46,7 +46,7 @@ public class connection {
         }
     }
 
-    static ResultSet execute_query(Connection conn, String query){
+    public static ResultSet execute_query(Connection conn, String query){
         /*
          * Execute query on a database. This will Execute a given query.
          * It will return a ResultSet object from java.sql.

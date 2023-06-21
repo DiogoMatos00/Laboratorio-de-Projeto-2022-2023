@@ -11,15 +11,13 @@ import java.util.List;
 public class questions {
 
     public static void createQuestion(String Description, String Difficulty, String Type,
-            Hashtable<String, List> answer, String Subject, String theme) throws SQLException {
+        Hashtable<String, List> answer, String Subject, String theme) throws SQLException {
         // Por agora lista mas poderá ser modificado
         // Descrição do q acontece aqui
         // TODOS OS PARAMETROS TEM DE PASSAR NUM CONTROLO ANTES DE VIREM PARA ESTE
         // METHOD.
 
-        String question_query = String.format(
-                "INSERT INTO QUESTION (DESCRIPTION, DIFFICULTY, TYPE) VALUES (%s, %s, %s);", Description, Difficulty,
-                Type);
+        String question_query = String.format("INSERT INTO QUESTION (DESCRIPTION, DIFFICULTY, TYPE) VALUES (%s, %s, %s);", Description, Difficulty, Type);
 
         // ########################
         // Conexão à base de dados
@@ -27,10 +25,10 @@ public class questions {
         connection.execute_query(conn, question_query);
 
         String id = connection.execute_query(conn, "SELECT LAST_INSERT_ID();").getString(1); // TESTAR ISTO PARA VER SE
-                                                                                             // FUNCIONA
+                                                                                                               // FUNCIONA
 
-        String topic_query = String.format("INSERT INTO TOPIC VALUES (%s, %s);", theme, id);
-        String subject_query = String.format("INSERT INTO QUESTION_SUBJECT VALUES (%s, %s);", Subject, id);
+        String topic_query = String.format("INSERT INTO TOPIC VALUES (%s, %s);", theme, id); //ESTRANHO AUTO_INCREMENT ????
+        String subject_query = String.format("INSERT INTO QUESTION_SUBJECT VALUES (%s, %s);", Subject, id);  //ESTRANHO AUTO_INCREMENT ????
 
         connection.execute_query(conn, topic_query);
         connection.execute_query(conn, subject_query);
@@ -78,6 +76,8 @@ public class questions {
                 break;
 
             case "Resposta Calculada":
+
+            ////REFAZER ISTO COM A NOVA BASE DE DADOS
                 Integer n_values = Integer.parseInt((String) answer.get("n_values").get(0));
                 for (int i = 0; i < n_values; i++) {
                     List<String> row = answer.get(i);
@@ -178,6 +178,8 @@ public class questions {
 
         // ########################
         // Conexão à base de dados
+
+        //REVER
         Connection conn = connection.connect();
 
         String query = String.format("SELECT Type FROM Question WHERE id=%s;", id);
