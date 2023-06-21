@@ -15,6 +15,7 @@ public class RespostaCurta extends javax.swing.JFrame {
      */
     public RespostaCurta() {
         initComponents();
+        setDefaultCloseOperation(RespostaCurta.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -27,9 +28,10 @@ public class RespostaCurta extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextFieldNomePerguntaCurta = new javax.swing.JTextField();
-        jTextFieldPerguntaPerguntaCurta = new javax.swing.JTextField();
         jTextFieldRespostaPerguntaCurta = new javax.swing.JTextField();
         jButtonSubmeterPerguntaCurta = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,16 +42,14 @@ public class RespostaCurta extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldPerguntaPerguntaCurta.setText("Pergunta");
-        jTextFieldPerguntaPerguntaCurta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPerguntaPerguntaCurtaActionPerformed(evt);
-            }
-        });
-
         jTextFieldRespostaPerguntaCurta.setText("Resposta");
 
         jButtonSubmeterPerguntaCurta.setText("Submeter");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Pergunta");
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,12 +57,15 @@ public class RespostaCurta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSubmeterPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextFieldPerguntaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldNomePerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonSubmeterPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldNomePerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(258, 258, 258))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -70,9 +73,9 @@ public class RespostaCurta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldNomePerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPerguntaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jButtonSubmeterPerguntaCurta)
@@ -80,11 +83,8 @@ public class RespostaCurta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldPerguntaPerguntaCurtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPerguntaPerguntaCurtaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPerguntaPerguntaCurtaActionPerformed
 
     private void jTextFieldNomePerguntaCurtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomePerguntaCurtaActionPerformed
         // TODO add your handling code here:
@@ -128,8 +128,9 @@ public class RespostaCurta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSubmeterPerguntaCurta;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldNomePerguntaCurta;
-    private javax.swing.JTextField jTextFieldPerguntaPerguntaCurta;
     private javax.swing.JTextField jTextFieldRespostaPerguntaCurta;
     // End of variables declaration//GEN-END:variables
 }

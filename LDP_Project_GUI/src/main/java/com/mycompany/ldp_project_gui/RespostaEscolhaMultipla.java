@@ -14,8 +14,12 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
      * Creates new form EscolhaMultipla
      */
     public RespostaEscolhaMultipla() {
+        System.out.println("nao");
+        
         initComponents();
+        setDefaultCloseOperation(RespostaEscolhaMultipla.DISPOSE_ON_CLOSE);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,24 +31,18 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextFieldNomePerguntaEM = new javax.swing.JTextField();
-        jTextFieldPerguntaPerguntaEM = new javax.swing.JTextField();
-        botaoAddOpcaoPerguntaEM = new javax.swing.JToggleButton();
-        jLabelAddOpcaoPerguntaEM = new javax.swing.JLabel();
         botaoSubmeterPerguntaEM = new javax.swing.JButton();
         jCheckBoxResposta2PerguntaEM = new javax.swing.JCheckBox();
         jCheckBoxResposta4PerguntaEM = new javax.swing.JCheckBox();
         jCheckBoxResposta3PerguntaEM = new javax.swing.JCheckBox();
         jCheckBoxResposta1PerguntaEM = new javax.swing.JCheckBox();
+        jCheckBoxResposta4PerguntaEM1 = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextFieldNomePerguntaEM.setText("Título");
-
-        jTextFieldPerguntaPerguntaEM.setText("Pergunta");
-
-        botaoAddOpcaoPerguntaEM.setText("+");
-
-        jLabelAddOpcaoPerguntaEM.setText("Opção");
 
         botaoSubmeterPerguntaEM.setText("Submeter");
 
@@ -55,7 +53,7 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
             }
         });
 
-        jCheckBoxResposta4PerguntaEM.setText("Resposta 4");
+        jCheckBoxResposta4PerguntaEM.setText("Resposta 5");
 
         jCheckBoxResposta3PerguntaEM.setText("Resposta 3");
 
@@ -66,29 +64,31 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxResposta4PerguntaEM1.setText("Resposta 4");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Pergunta");
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextFieldPerguntaPerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNomePerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxResposta2PerguntaEM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBoxResposta3PerguntaEM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTextFieldNomePerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jCheckBoxResposta4PerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBoxResposta1PerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botaoAddOpcaoPerguntaEM)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelAddOpcaoPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addComponent(botaoSubmeterPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(357, 357, 357)
+                            .addComponent(botaoSubmeterPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCheckBoxResposta3PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBoxResposta1PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBoxResposta2PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBoxResposta4PerguntaEM1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,24 +97,27 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldNomePerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPerguntaPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoAddOpcaoPerguntaEM)
-                    .addComponent(jLabelAddOpcaoPerguntaEM)
-                    .addComponent(jCheckBoxResposta1PerguntaEM))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxResposta1PerguntaEM)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxResposta2PerguntaEM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxResposta3PerguntaEM)
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoSubmeterPerguntaEM)
-                    .addComponent(jCheckBoxResposta4PerguntaEM))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(botaoSubmeterPerguntaEM))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxResposta4PerguntaEM1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxResposta4PerguntaEM)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBoxResposta2PerguntaEMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta2PerguntaEMActionPerformed
@@ -162,14 +165,14 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton botaoAddOpcaoPerguntaEM;
     private javax.swing.JButton botaoSubmeterPerguntaEM;
     private javax.swing.JCheckBox jCheckBoxResposta1PerguntaEM;
     private javax.swing.JCheckBox jCheckBoxResposta2PerguntaEM;
     private javax.swing.JCheckBox jCheckBoxResposta3PerguntaEM;
     private javax.swing.JCheckBox jCheckBoxResposta4PerguntaEM;
-    private javax.swing.JLabel jLabelAddOpcaoPerguntaEM;
+    private javax.swing.JCheckBox jCheckBoxResposta4PerguntaEM1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldNomePerguntaEM;
-    private javax.swing.JTextField jTextFieldPerguntaPerguntaEM;
     // End of variables declaration//GEN-END:variables
 }

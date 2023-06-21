@@ -4,6 +4,10 @@
  */
 package com.mycompany.ldp_project_gui;
 
+import javax.swing.UIManager;
+
+
+
 /**
  *
  * @author vasco
@@ -14,7 +18,13 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
      * Creates new form JFrameMenuPrincipal
      */
     public JFrameMenuPrincipal() {
+        
+        
+   
         initComponents();
+        
+        
+        
     }
 
     /**
@@ -136,6 +146,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                System.out.println(info);
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;

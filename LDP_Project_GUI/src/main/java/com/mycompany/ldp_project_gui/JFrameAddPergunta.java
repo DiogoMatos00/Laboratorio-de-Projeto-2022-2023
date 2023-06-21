@@ -41,6 +41,7 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBoxDificuldadePergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muito Fácil", "Fácil", "Médio", "Difícil", "Muito Difícil" }));
+        jComboBoxDificuldadePergunta.setSelectedIndex(-1);
         jComboBoxDificuldadePergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDificuldadePerguntaActionPerformed(evt);
@@ -50,15 +51,32 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         jLabelDificuldadePergunta.setText("Dificuldade");
 
         jComboBoxTemaPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTemaPergunta.setSelectedIndex(-1);
         jComboBoxTemaPergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTemaPerguntaActionPerformed(evt);
             }
         });
 
-        jComboBoxTipoPerguntaPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Múltipla", "Resposta Múltipla", "Desenvolvimento", "Resposta Curta", "Correspondência de Colunas", "Resposta Calculada" }));
+        jComboBoxTipoPerguntaPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Múltipla", "Desenvolvimento", "Curta", "Calculada", "Correspondência de Colunas" }));
+        jComboBoxTipoPerguntaPergunta.setSelectedIndex(-1);
+        jComboBoxTipoPerguntaPergunta.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxTipoPerguntaPerguntaPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        jComboBoxTipoPerguntaPergunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoPerguntaPerguntaActionPerformed(evt);
+            }
+        });
 
         jComboBoxUCPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxUCPergunta.setSelectedIndex(-1);
 
         jLabelUCPergunta.setText("Unidade Curricular");
 
@@ -67,6 +85,11 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         jLabelTipoPerguntaPergunta.setText("Tipo de Pergunta");
 
         botaoSubmitPergunta.setText("Submit");
+        botaoSubmitPergunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSubmitPerguntaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,40 +97,46 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxTemaPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxDificuldadePergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxTipoPerguntaPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxUCPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelDificuldadePergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUCPergunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelTemaPergunta)
-                    .addComponent(jLabelTipoPerguntaPergunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(botaoSubmitPergunta)
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTemaPergunta)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxTemaPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxDificuldadePergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxTipoPerguntaPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxUCPergunta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelTipoPerguntaPergunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                        .addComponent(botaoSubmitPergunta)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDificuldadePergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelUCPergunta))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDificuldadePergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDificuldadePergunta))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxUCPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUCPergunta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxTemaPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTemaPergunta))
-                .addGap(32, 32, 32)
+                .addGap(24, 24, 24)
+                .addComponent(jLabelDificuldadePergunta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxDificuldadePergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelUCPergunta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxUCPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelTemaPergunta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxTemaPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelTipoPerguntaPergunta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTipoPerguntaPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTipoPerguntaPergunta)
                     .addComponent(botaoSubmitPergunta))
                 .addGap(31, 31, 31))
         );
@@ -124,6 +153,49 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTemaPerguntaActionPerformed
 
+    private void jComboBoxTipoPerguntaPerguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoPerguntaPerguntaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoPerguntaPerguntaActionPerformed
+
+    private void jComboBoxTipoPerguntaPerguntaPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxTipoPerguntaPerguntaPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:    
+    }//GEN-LAST:event_jComboBoxTipoPerguntaPerguntaPopupMenuWillBecomeInvisible
+
+    private void botaoSubmitPerguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSubmitPerguntaActionPerformed
+        // TODO add your handling code here:
+        int combobox1 =jComboBoxTipoPerguntaPergunta.getSelectedIndex();
+    
+    if(0 == combobox1){
+        RespostaEscolhaMultipla jf4 = new RespostaEscolhaMultipla();
+        jf4.show();
+        dispose();
+        
+    }else if(combobox1 == 1){
+        RespostaDesenvolvimento jf5 = new RespostaDesenvolvimento();
+        jf5.show();
+        dispose();
+        
+    }else if(combobox1 == 2){
+        RespostaCurta jf6 = new RespostaCurta();
+        jf6.show();
+        dispose();
+        
+    }else if(combobox1 == 3){
+        RespostaCalculada jf7 = new RespostaCalculada();
+        jf7.show();
+        dispose();
+        
+    }else if(combobox1 == 4){
+        RespostaCorrespondencia jf8 = new RespostaCorrespondencia();
+        jf8.show();
+        dispose();}
+    }//GEN-LAST:event_botaoSubmitPerguntaActionPerformed
+
+    
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */

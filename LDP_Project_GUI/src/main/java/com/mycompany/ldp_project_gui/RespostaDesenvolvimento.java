@@ -15,6 +15,7 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
      */
     public RespostaDesenvolvimento() {
         initComponents();
+        setDefaultCloseOperation(RespostaDesenvolvimento.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -27,19 +28,27 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextFieldNomePerguntaDesenvolvimento = new javax.swing.JTextField();
-        jTextFieldPerguntaPerguntaDesenvolvimento = new javax.swing.JTextField();
-        jTextFieldRepostaPerguntaDesenvolvimento = new javax.swing.JTextField();
         botaoSubmeterPerguntaDesenvolvimento = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextFieldNomePerguntaDesenvolvimento.setText("Título");
 
-        jTextFieldPerguntaPerguntaDesenvolvimento.setText("Pergunta");
-
-        jTextFieldRepostaPerguntaDesenvolvimento.setText("Resposta");
-
         botaoSubmeterPerguntaDesenvolvimento.setText("Submeter");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Pergunta");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Resposta");
+        jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -49,10 +58,10 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botaoSubmeterPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTextFieldRepostaPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldPerguntaPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldNomePerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldNomePerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -60,16 +69,17 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jTextFieldNomePerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPerguntaPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldRepostaPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(botaoSubmeterPerguntaDesenvolvimento)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -110,8 +120,10 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoSubmeterPerguntaDesenvolvimento;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextFieldNomePerguntaDesenvolvimento;
-    private javax.swing.JTextField jTextFieldPerguntaPerguntaDesenvolvimento;
-    private javax.swing.JTextField jTextFieldRepostaPerguntaDesenvolvimento;
     // End of variables declaration//GEN-END:variables
 }

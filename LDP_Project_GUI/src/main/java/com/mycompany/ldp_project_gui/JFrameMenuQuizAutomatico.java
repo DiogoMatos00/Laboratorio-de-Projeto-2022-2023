@@ -30,8 +30,18 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
         jPanelQuizAutomatico1 = new javax.swing.JPanel();
         jComboBoxDificuldadeQuizAutomatico = new javax.swing.JComboBox<>();
         jLabelDificuldadeQuizAutomatico = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        QuizAutomatico1 = new javax.swing.JLabel();
+        botaoSubmitNPerguntas = new javax.swing.JButton();
+        botaoTemasQA = new javax.swing.JButton();
+        botaoUCQA = new javax.swing.JButton();
+        botaoTipoPerguntaQA = new javax.swing.JButton();
+        jLabelDificuldadeQuizAutomatico2 = new javax.swing.JLabel();
+        jLabelDificuldadeQuizAutomatico3 = new javax.swing.JLabel();
+        jLabelDificuldadeQuizAutomatico4 = new javax.swing.JLabel();
         tituloQuizAutomatico = new javax.swing.JLabel();
         jTextFieldNomeQuizAutomatico = new javax.swing.JTextField();
+        botaoExportarQA = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,9 +54,43 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
 
         jPanelQuizAutomatico1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
 
-        jComboBoxDificuldadeQuizAutomatico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDificuldadeQuizAutomatico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muito Fácil", "Fácil", "Médio", "Difícil", "Muito Difícil" }));
+        jComboBoxDificuldadeQuizAutomatico.setSelectedIndex(-1);
 
         jLabelDificuldadeQuizAutomatico.setText("Dificuldade");
+
+        jTextField1.setText("(Nº)");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        QuizAutomatico1.setText("Perguntas");
+
+        botaoSubmitNPerguntas.setText("Submit");
+
+        botaoTemasQA.setText("x");
+        botaoTemasQA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoTemasQAActionPerformed(evt);
+            }
+        });
+
+        botaoUCQA.setText("x");
+
+        botaoTipoPerguntaQA.setText("x");
+        botaoTipoPerguntaQA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoTipoPerguntaQAActionPerformed(evt);
+            }
+        });
+
+        jLabelDificuldadeQuizAutomatico2.setText("Temas");
+
+        jLabelDificuldadeQuizAutomatico3.setText("UCs");
+
+        jLabelDificuldadeQuizAutomatico4.setText("Tipos de Pergunta");
 
         javax.swing.GroupLayout jPanelQuizAutomatico1Layout = new javax.swing.GroupLayout(jPanelQuizAutomatico1);
         jPanelQuizAutomatico1.setLayout(jPanelQuizAutomatico1Layout);
@@ -54,19 +98,53 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
             jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQuizAutomatico1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBoxDificuldadeQuizAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelDificuldadeQuizAutomatico)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoSubmitNPerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelQuizAutomatico1Layout.createSequentialGroup()
+                        .addGroup(jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(jComboBoxDificuldadeQuizAutomatico, 0, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelQuizAutomatico1Layout.createSequentialGroup()
+                                .addGroup(jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(botaoUCQA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(botaoTemasQA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(QuizAutomatico1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
+                    .addComponent(botaoTipoPerguntaQA, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDificuldadeQuizAutomatico4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(jLabelDificuldadeQuizAutomatico3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelDificuldadeQuizAutomatico2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelDificuldadeQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelQuizAutomatico1Layout.setVerticalGroup(
             jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQuizAutomatico1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(40, 40, 40)
                 .addGroup(jPanelQuizAutomatico1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDificuldadeQuizAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDificuldadeQuizAutomatico))
-                .addContainerGap(308, Short.MAX_VALUE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(QuizAutomatico1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDificuldadeQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxDificuldadeQuizAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDificuldadeQuizAutomatico2, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoTemasQA)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDificuldadeQuizAutomatico3, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoUCQA)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelDificuldadeQuizAutomatico4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoTipoPerguntaQA)
+                .addGap(18, 18, 18)
+                .addComponent(botaoSubmitNPerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
 
         tituloQuizAutomatico.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -74,23 +152,28 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
 
         jTextFieldNomeQuizAutomatico.setText("Nome do Quiz");
 
+        botaoExportarQA.setText("jButton4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jPanelQuizAutomatico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNomeQuizAutomatico)
-                            .addComponent(botaoMenuPrincipalQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(246, 246, 246)
-                        .addComponent(tituloQuizAutomatico)))
-                .addContainerGap(423, Short.MAX_VALUE))
+                    .addComponent(jTextFieldNomeQuizAutomatico)
+                    .addComponent(botaoMenuPrincipalQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(246, 246, 246)
+                .addComponent(tituloQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(423, 423, 423))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jPanelQuizAutomatico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoExportarQA)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,10 +185,12 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(tituloQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(jTextFieldNomeQuizAutomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNomeQuizAutomatico, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanelQuizAutomatico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addComponent(jPanelQuizAutomatico1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(botaoExportarQA)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -120,6 +205,18 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
         dispose(); //fechar o frame atual
             // TODO add your handling code here:
     }//GEN-LAST:event_botaoMenuPrincipalQuizAutomaticoActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void botaoTemasQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTemasQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoTemasQAActionPerformed
+
+    private void botaoTipoPerguntaQAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTipoPerguntaQAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoTipoPerguntaQAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,10 +255,20 @@ public class JFrameMenuQuizAutomatico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel QuizAutomatico1;
+    private javax.swing.JButton botaoExportarQA;
     private javax.swing.JButton botaoMenuPrincipalQuizAutomatico;
+    private javax.swing.JButton botaoSubmitNPerguntas;
+    private javax.swing.JButton botaoTemasQA;
+    private javax.swing.JButton botaoTipoPerguntaQA;
+    private javax.swing.JButton botaoUCQA;
     private javax.swing.JComboBox<String> jComboBoxDificuldadeQuizAutomatico;
     private javax.swing.JLabel jLabelDificuldadeQuizAutomatico;
+    private javax.swing.JLabel jLabelDificuldadeQuizAutomatico2;
+    private javax.swing.JLabel jLabelDificuldadeQuizAutomatico3;
+    private javax.swing.JLabel jLabelDificuldadeQuizAutomatico4;
     private javax.swing.JPanel jPanelQuizAutomatico1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldNomeQuizAutomatico;
     private javax.swing.JLabel tituloQuizAutomatico;
     // End of variables declaration//GEN-END:variables

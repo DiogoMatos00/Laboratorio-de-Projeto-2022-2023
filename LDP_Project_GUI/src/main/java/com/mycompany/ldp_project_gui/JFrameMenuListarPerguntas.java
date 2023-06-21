@@ -28,6 +28,7 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanelListarPerguntas1 = new javax.swing.JPanel();
         botaoAddPergunta = new javax.swing.JButton();
         JLabelAddPergunta = new javax.swing.JLabel();
@@ -41,7 +42,13 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
         jLabelDificuldadeLista = new javax.swing.JLabel();
         tituloListaDePerguntas = new javax.swing.JLabel();
         botaoMenuPrincipal_ListarPerguntas = new javax.swing.JButton();
-        jScrollPaneListarPerguntas1 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        botaoRemoverTema = new javax.swing.JButton();
+        botaoRemoverUc = new javax.swing.JButton();
+        JLabelRemoverTema = new javax.swing.JLabel();
+        JLabelRemoverUC = new javax.swing.JLabel();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,12 +64,21 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
         JLabelAddPergunta.setText("Pergunta");
 
         jComboBoxTemaLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTemaLista.setSelectedIndex(-1);
 
         jComboBoxCadeiraLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCadeiraLista.setSelectedIndex(-1);
 
-        jComboBoxDificuldadeLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDificuldadeLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Muito Fácil", "Fácil", "Médio", "Difícil", "Muito Difícil" }));
+        jComboBoxDificuldadeLista.setSelectedIndex(-1);
 
-        jComboBoxTipoPerguntaLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTipoPerguntaLista.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escolha Múltipla", "Desenvolvimento", "Curta", "Calculada", "Correspondência de Colunas" }));
+        jComboBoxTipoPerguntaLista.setSelectedIndex(-1);
+        jComboBoxTipoPerguntaLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoPerguntaListaActionPerformed(evt);
+            }
+        });
 
         jLabelCadeiraLista.setText("Cadeira");
 
@@ -79,53 +95,47 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
             .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDificuldadeLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTipoPerguntaLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelTemaLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCadeiraLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
-                        .addComponent(jComboBoxCadeiraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelCadeiraLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
-                        .addComponent(jComboBoxTemaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelTemaLista, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-                    .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
-                        .addComponent(botaoAddPergunta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JLabelAddPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
+                                .addComponent(botaoAddPergunta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JLabelAddPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxTemaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxCadeiraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxDificuldadeLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
-                        .addComponent(jComboBoxTipoPerguntaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelTipoPerguntaLista, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
-                    .addGroup(jPanelListarPerguntas1Layout.createSequentialGroup()
-                        .addComponent(jComboBoxDificuldadeLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelDificuldadeLista, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
+                    .addComponent(jComboBoxTipoPerguntaLista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelListarPerguntas1Layout.setVerticalGroup(
             jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListarPerguntas1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxCadeiraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCadeiraLista))
+                .addGap(35, 35, 35)
+                .addComponent(jLabelCadeiraLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxCadeiraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxTemaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTemaLista))
+                .addComponent(jLabelTemaLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxTemaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDificuldadeLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDificuldadeLista))
+                .addComponent(jLabelDificuldadeLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxDificuldadeLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxTipoPerguntaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTipoPerguntaLista))
-                .addGap(95, 95, 95)
+                .addComponent(jLabelTipoPerguntaLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxTipoPerguntaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanelListarPerguntas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoAddPergunta)
                     .addComponent(JLabelAddPergunta))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(71, 71, 71))
         );
 
         tituloListaDePerguntas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -138,39 +148,71 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
             }
         });
 
-        jScrollPaneListarPerguntas1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        botaoRemoverTema.setText("*");
+        botaoRemoverTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverTemaActionPerformed(evt);
+            }
+        });
+
+        botaoRemoverUc.setText("*");
+        botaoRemoverUc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverUcActionPerformed(evt);
+            }
+        });
+
+        JLabelRemoverTema.setText("Temas");
+
+        JLabelRemoverUC.setText("Unidades Curriculares");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addGap(81, 81, 81)
                 .addComponent(botaoMenuPrincipal_ListarPerguntas)
-                .addGap(276, 276, 276)
-                .addComponent(tituloListaDePerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addGap(277, 277, 277)
+                .addComponent(tituloListaDePerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(462, 462, 462))
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jPanelListarPerguntas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPaneListarPerguntas1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelListarPerguntas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoRemoverTema)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JLabelRemoverTema, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoRemoverUc)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JLabelRemoverUC)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(tituloListaDePerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                    .addComponent(botaoMenuPrincipal_ListarPerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloListaDePerguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(botaoMenuPrincipal_ListarPerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanelListarPerguntas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPaneListarPerguntas1))
-                .addGap(64, 64, 64))
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoRemoverTema)
+                    .addComponent(botaoRemoverUc)
+                    .addComponent(JLabelRemoverTema)
+                    .addComponent(JLabelRemoverUC))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -190,6 +232,22 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
         JFrameAddPergunta jf4 = new JFrameAddPergunta();
         jf4.show(); //display JFrameMenuQuizManual        // TODO add your handling code here:
     }//GEN-LAST:event_botaoAddPerguntaActionPerformed
+
+    private void botaoRemoverTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverTemaActionPerformed
+        JFrameListaTema jf5 = new JFrameListaTema();
+        jf5.show(); //display JFrameMenuQuizManual
+        
+    }//GEN-LAST:event_botaoRemoverTemaActionPerformed
+
+    private void botaoRemoverUcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverUcActionPerformed
+        // TODO add your handling code here:
+        JFrameListaUC jf6 = new JFrameListaUC();
+        jf6.show(); //display JFrameMenuQuizManual
+    }//GEN-LAST:event_botaoRemoverUcActionPerformed
+
+    private void jComboBoxTipoPerguntaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoPerguntaListaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoPerguntaListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,8 +287,13 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelAddPergunta;
+    private javax.swing.JLabel JLabelRemoverTema;
+    private javax.swing.JLabel JLabelRemoverUC;
     private javax.swing.JButton botaoAddPergunta;
     private javax.swing.JButton botaoMenuPrincipal_ListarPerguntas;
+    private javax.swing.JButton botaoRemoverTema;
+    private javax.swing.JButton botaoRemoverUc;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBoxCadeiraLista;
     private javax.swing.JComboBox<String> jComboBoxDificuldadeLista;
     private javax.swing.JComboBox<String> jComboBoxTemaLista;
@@ -240,7 +303,7 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTemaLista;
     private javax.swing.JLabel jLabelTipoPerguntaLista;
     private javax.swing.JPanel jPanelListarPerguntas1;
-    private javax.swing.JScrollPane jScrollPaneListarPerguntas1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel tituloListaDePerguntas;
     // End of variables declaration//GEN-END:variables
 }
