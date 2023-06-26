@@ -65,6 +65,7 @@ public class JFramePopupPergunta extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
 
 
+
         jButton1.setText("Exportar");
 
         jTextArea1.append(info.get(1));

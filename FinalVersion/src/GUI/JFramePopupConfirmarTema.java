@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author vasco
@@ -13,9 +17,13 @@ public class JFramePopupConfirmarTema extends javax.swing.JFrame {
     /**
      * Creates new form JFramePopupConfirmarTema
      */
-    public JFramePopupConfirmarTema() {
-        initComponents();
+    public JFramePopupConfirmarTema(String id) {
+        initComponents(id);
         setDefaultCloseOperation(JFrameAddPergunta.DISPOSE_ON_CLOSE);
+
+    }
+
+    public JFramePopupConfirmarTema() {
 
     }
 
@@ -26,7 +34,7 @@ public class JFramePopupConfirmarTema extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String id) {
 
         jLabel1 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -54,9 +62,36 @@ public class JFramePopupConfirmarTema extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton2.setText("Apagar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(jCheckBox2.isSelected()){
+                    listagem_de_perguntas.removeTopic(id);
+                    JFrameListaTema jf2 = null;
+                    try {
+                        jf2 = new JFrameListaTema();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    jf2.show(); //display
+                    dispose();
+                }
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JFrameListaTema jf2 = null;
+                try {
+                    jf2 = new JFrameListaTema();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                jf2.show(); //display
+                dispose();
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

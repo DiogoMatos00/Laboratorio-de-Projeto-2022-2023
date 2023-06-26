@@ -23,11 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="labelNomesIdentificacao" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -42,6 +37,11 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labelNomesIdentificacao" min="-2" pref="115" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,7 +101,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelNomesIdentificacao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ferramenta desenvolvida por: 30007252, 30007687, 30007531, 30007389 "/>
+        <Property name="text" type="java.lang.String" value="Cr&#xe9;ditos e Copyright"/>
       </Properties>
     </Component>
   </SubComponents>

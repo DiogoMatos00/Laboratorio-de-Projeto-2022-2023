@@ -359,14 +359,22 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
         botaoRemoverTema.setText("*");
         botaoRemoverTema.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                botaoRemoverTemaActionPerformed(evt);
+                try {
+                    botaoRemoverTemaActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
         botaoRemoverUc.setText("*");
         botaoRemoverUc.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                botaoRemoverUcActionPerformed(evt);
+                try {
+                    botaoRemoverUcActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -481,16 +489,17 @@ public class JFrameMenuListarPerguntas extends javax.swing.JFrame {
         jf4.show(); //display JFrameMenuQuizManual        // TODO add your handling code here:
     }
 
-    private void botaoRemoverTemaActionPerformed(java.awt.event.ActionEvent evt) {
+    private void botaoRemoverTemaActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
         JFrameListaTema jf5 = new JFrameListaTema();
         jf5.show(); //display JFrameMenuQuizManual
-
+        dispose();
     }
 
-    private void botaoRemoverUcActionPerformed(java.awt.event.ActionEvent evt) {
+    private void botaoRemoverUcActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
         // TODO add your handling code here:
         JFrameListaUC jf6 = new JFrameListaUC();
         jf6.show(); //display JFrameMenuQuizManual
+        dispose();
     }
 
     private void jComboBoxTipoPerguntaListaActionPerformed(java.awt.event.ActionEvent evt) {

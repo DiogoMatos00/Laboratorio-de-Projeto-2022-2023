@@ -4,6 +4,18 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author vasco
@@ -13,7 +25,7 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
     /**
      * Creates new form JFrameMenuQuizManual
      */
-    public JFrameMenuQuizManual() {
+    public JFrameMenuQuizManual() throws SQLException {
         initComponents();
     }
 
@@ -24,18 +36,132 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws SQLException {
 
         botaoMenuPrincipalQuizManual = new javax.swing.JButton();
-        jPanelQuizManual1 = new javax.swing.JPanel();
-        botaoRemoverUltimaPergunta = new javax.swing.JButton();
-        botaoAddPerguntaQuizManual = new javax.swing.JButton();
-        jLabelAddPerguntaQuizManual = new javax.swing.JLabel();
-        jLabelRemovePerguntaQuizManual = new javax.swing.JLabel();
-        NPerguntas = new javax.swing.JTextField();
-        botaoSubmitNPerguntas = new javax.swing.JButton();
         jTextFieldNomeQuizManual = new javax.swing.JTextField();
         tituloQuizManual = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabelCadeiraLista = new javax.swing.JLabel();
+        jComboBoxCadeiraLista = new javax.swing.JComboBox<>();
+        jComboBoxTemaLista = new javax.swing.JComboBox<>();
+        jLabelCadeiraLista1 = new javax.swing.JLabel();
+        jComboBoxTipoPerguntaLista = new javax.swing.JComboBox<>();
+        jLabelCadeiraLista2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+
+        String header[] = new String[] {"ID", "Descrição", "UC", "Tipo de pergunta", "info"};
+        jTextField1.setEditable(false);
+
+        List<String> ids = new ArrayList<String>();
+        List<String> list_to_export = new ArrayList<>();
+
+        DefaultTableModel dtm1 = new DefaultTableModel(0,0){
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;//This causes all cells to be not editable
+            }
+        };
+
+        dtm1.setColumnIdentifiers(header);
+
+        jTable1.setModel(dtm1);
+
+        DefaultTableModel dtm2 = new DefaultTableModel(0,0){
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;//This causes all cells to be not editable
+            }
+        };
+
+        dtm2.setColumnIdentifiers(header);
+        jTable2.setModel(dtm2);
+
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable2.getTableHeader().setReorderingAllowed(false);
+
+
+        List<List<String>> questions = listagem_de_perguntas.getAllQuestions();
+        for(int i = 0; i < questions.size(); i++){
+            List<String> a = questions.get(i);
+            if(!ids.contains(a.get(0))) {
+                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2)});
+            }
+        }
+
+
+
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    if(jTable1.isColumnSelected(4)){
+
+                        String id = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+                        JFrameAdicionarPerguntaQuizManual jfpopup = null;
+                        try {
+                            jfpopup = new JFrameAdicionarPerguntaQuizManual(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        jfpopup.show();
+                    } else{
+                        if(!e.getValueIsAdjusting()) {
+                            try{
+                                int selected = jTable1.getSelectedRow();
+                                ids.add(jTable1.getValueAt(selected, 0).toString());
+                                list_to_export.add(jTable1.getValueAt(selected, 0).toString());
+                                dtm2.addRow(new Object[]{jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(), jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString(), jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString()});
+                                dtm1.removeRow(selected);
+                                Integer numb = Integer.parseInt(jTextField1.getText()) + 1;
+                                jTextField1.setText(numb.toString());
+                            } catch (Exception f){
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        jTable2.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    if(jTable1.isColumnSelected(4)){
+
+                        String id = (String) jTable2.getValueAt(jTable2.getSelectedRow(), 0);
+
+                        JFrameAdicionarPerguntaQuizManual jfpopup = null;
+                        try {
+                            jfpopup = new JFrameAdicionarPerguntaQuizManual(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        jfpopup.show();
+                    } else{
+                        if(!e.getValueIsAdjusting()) {
+                            try{
+                                int selected = jTable2.getSelectedRow();
+                                ids.remove(jTable2.getValueAt(selected, 0).toString());
+                                dtm1.addRow(new Object[]{jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString(), jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString(), jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString(), jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString()});
+                                dtm2.removeRow(selected);
+                                Integer numb = Integer.parseInt(jTextField1.getText()) - 1;
+                                jTextField1.setText(numb.toString());
+                            } catch (Exception f){
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,71 +169,9 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
         botaoMenuPrincipalQuizManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoMenuPrincipalQuizManualActionPerformed(evt);
+                dispose();
             }
         });
-
-        jPanelQuizManual1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-
-        botaoRemoverUltimaPergunta.setText("-");
-
-        botaoAddPerguntaQuizManual.setText("+");
-
-        jLabelAddPerguntaQuizManual.setText("Adicionar Pergunta");
-
-        jLabelRemovePerguntaQuizManual.setText("Remover Última Pergunta");
-
-        NPerguntas.setText("Nº Perguntas");
-
-        botaoSubmitNPerguntas.setText("Submit");
-
-        javax.swing.GroupLayout jPanelQuizManual1Layout = new javax.swing.GroupLayout(jPanelQuizManual1);
-        jPanelQuizManual1.setLayout(jPanelQuizManual1Layout);
-        jPanelQuizManual1Layout.setHorizontalGroup(
-            jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                .addGroup(jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(botaoRemoverUltimaPergunta, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelRemovePerguntaQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                                .addComponent(botaoAddPerguntaQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelAddPerguntaQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(35, 35, 35))
-                            .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                                .addComponent(NPerguntas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoSubmitNPerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanelQuizManual1Layout.setVerticalGroup(
-            jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelQuizManual1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(NPerguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botaoSubmitNPerguntas))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabelAddPerguntaQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(botaoAddPerguntaQuizManual))
-                .addGap(10, 10, 10)
-                .addGroup(jPanelQuizManual1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelQuizManual1Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabelRemovePerguntaQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(botaoRemoverUltimaPergunta))
-                .addGap(33, 33, 33))
-        );
 
         jTextFieldNomeQuizManual.setText("Nome do Quiz");
         jTextFieldNomeQuizManual.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +182,303 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
 
         tituloQuizManual.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloQuizManual.setText("Gerar Quiz Manual");
+
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable2.getTableHeader().setResizingAllowed(false);
+
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(15);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(15);
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(15);
+
+        jScrollPane1.setViewportView(jTable2);
+
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+
+        jLabelCadeiraLista.setText("Cadeira");
+
+
+
+        jComboBoxTemaLista.setModel(new DefaultComboBoxModel<>());
+        jComboBoxTemaLista.setSelectedIndex(-1);
+        jComboBoxTemaLista.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<List<String>> result = null;
+                String topic = (String) jComboBoxTemaLista.getSelectedItem();
+                String subject = (String) jComboBoxCadeiraLista.getSelectedItem();
+
+                try {
+                    result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE topic.TopicName = '%s';", topic));
+                } catch (SQLException eSQL) {
+                    throw new RuntimeException(eSQL);
+                }
+
+                if(topic == "--Default--"){
+                    dtm1.setRowCount(0);
+                    List<List<String>> resultS = null;
+                    try {
+                        resultS = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE question_subject.SubjectName = '%s';", subject));
+                    } catch (SQLException eSQL) {
+                        throw new RuntimeException(eSQL);
+                    }
+
+                    for (int i = 0; i < resultS.size(); i++) {
+                        List<String> a = resultS.get(i);
+                        if(!ids.contains(a.get(0))) {
+                            dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                        }
+                    }
+                }
+
+                if(topic != "--Default--") {
+                    dtm1.setRowCount(0);
+                }
+
+                for(int i = 0; i < result.size(); i++){
+                    List<String> a = result.get(i);
+                    if(!ids.contains(a.get(0))) {
+                        dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                    }
+                }
+            }
+        });
+
+
+        jComboBoxCadeiraLista.setModel(new DefaultComboBoxModel<>());
+        jComboBoxCadeiraLista.setSelectedIndex(-1);
+        jComboBoxCadeiraLista.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jComboBoxTemaLista.removeAllItems();
+                String subject = (String) jComboBoxCadeiraLista.getSelectedItem();
+                List<String> topic = new ArrayList<String>();
+
+
+                try {
+                    topic = listagem_de_perguntas.getTopic(subject);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                topic.add(0, "--Default--");
+
+                for(int i = 0; i<topic.size(); i++) {
+                    jComboBoxTemaLista.addItem(topic.get(i));
+                }
+
+                List<List<String>> result = null;
+                try {
+                    result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE question_subject.SubjectName = '%s';", subject));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                if(subject == "--Default--"){
+                    dtm1.setRowCount(0);
+                    List<List<String>> questions = null;
+                    try {
+                        questions = listagem_de_perguntas.getAllQuestionsWithType();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    for(int i = 0; i < questions.size(); i++){
+                        List<String> a = questions.get(i);
+                        if(!ids.contains(a.get(0))) {
+                            dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                        }
+                    }
+                }
+
+                if(subject != "--Default--") {
+                    dtm1.setRowCount(0);
+                }
+                for(int i = 0; i < result.size(); i++){
+                    List<String> a = result.get(i);
+                    if(!ids.contains(a.get(0))) {
+                        dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                    }
+                }
+            }
+        });
+
+        List<String> values = listagem_de_perguntas.getSubjects();
+        values.add(0, "--Default--");
+
+        for(int i = 0; i<values.size(); i++) {
+            jComboBoxCadeiraLista.addItem(values.get(i));
+        }
+
+
+        jLabelCadeiraLista1.setText("Tema");
+
+        jComboBoxTipoPerguntaLista.setModel(new DefaultComboBoxModel<>(new String[] {"--Default--", "Escolha Múltipla", "Desenvolvimento", "Curta", "Calculada", "Correspondência de Colunas" }));
+        jComboBoxTipoPerguntaLista.setSelectedIndex(0);
+        jComboBoxTipoPerguntaLista.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                List<List<String>> result = null;
+                String topic = (String) jComboBoxTemaLista.getSelectedItem();
+                String subject = (String) jComboBoxCadeiraLista.getSelectedItem();
+                String qType = (String) jComboBoxTipoPerguntaLista.getSelectedItem();
+
+                try {
+                    result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE QUESTION.Type = '%s';", qType));
+                } catch (SQLException eSQL) {
+                    throw new RuntimeException(eSQL);
+                }
+
+                if(qType == "--Default--"){
+                    if(topic == "--Default--"){
+                        dtm1.setRowCount(0);
+                        result = null;
+                        try {
+                            result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE question_subject.SubjectName = '%s';", subject));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        for (int i = 0; i < result.size(); i++) {
+                            List<String> a = result.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                            }
+                        }
+                    }
+
+                    if(topic != "--Default--") {
+                        dtm1.setRowCount(0);
+                        try {
+                            result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE topic.TopicName = '%s';", topic));
+                        } catch (SQLException eSQL) {
+                            throw new RuntimeException(eSQL);
+                        }
+                        for (int i = 0; i < result.size(); i++) {
+                            List<String> a = result.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                            }
+                        }
+                    }
+
+                    if (subject == "--Default--") {
+                        dtm1.setRowCount(0);
+                        List<List<String>> questions = null;
+                        try {
+                            questions = listagem_de_perguntas.getAllQuestions();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        for (int i = 0; i < questions.size(); i++) {
+                            List<String> a = questions.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2)});
+                            }
+                        }
+                    }
+                }else{
+                    dtm1.setRowCount(0);
+                    if(topic == "--Default--"){
+                        dtm1.setRowCount(0);
+                        result = null;
+                        try {
+                            result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE question_subject.SubjectName = '%s' AND question.Type = '%s';", subject, qType));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        for (int i = 0; i < result.size(); i++) {
+                            List<String> a = result.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                            }
+                        }
+                    }
+
+                    if(topic != "--Default--") {
+                        dtm1.setRowCount(0);
+                        try {
+                            result = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE topic.TopicName = '%s' AND question.Type = '%s';", topic, qType));
+                        } catch (SQLException eSQL) {
+                            throw new RuntimeException(eSQL);
+                        }
+                        for (int i = 0; i < result.size(); i++) {
+                            List<String> a = result.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                            }
+                        }
+                    }
+
+                    if (subject == "--Default--") {
+                        dtm1.setRowCount(0);
+                        List<List<String>> questions = null;
+                        try {
+                            questions = listagem_de_perguntas.getCustomQuestionWithType(String.format("SELECT QUESTION.QuestionID, QUESTION.Description, question_subject.SubjectName, QUESTION.Type FROM QUESTION INNER JOIN topic ON question.TopicId = topic.TopicId INNER JOIN question_subject ON question_subject.QuestionSubjectId = topic.QuestionSubjectId WHERE question.Type = '%s';",  qType));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        for (int i = 0; i < questions.size(); i++) {
+                            List<String> a = questions.get(i);
+                            if(!ids.contains(a.get(0))) {
+                                dtm1.addRow(new Object[]{a.get(0), a.get(1), a.get(2), a.get(3)});
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
+
+        jLabelCadeiraLista2.setText("Tipo de Pergunta");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCadeiraLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCadeiraLista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCadeiraLista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxTemaLista, 0, 179, Short.MAX_VALUE)
+                    .addComponent(jLabelCadeiraLista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxTipoPerguntaLista, 0, 179, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabelCadeiraLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxCadeiraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelCadeiraLista1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxTemaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelCadeiraLista2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxTipoPerguntaLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTextField1.setText("0");
+
+        jButton1.setText("Export");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(ids.size() != 0){
+                    dbToXML.EssayQueryToXML.main();
+                    dbToXML.MatchQueryToXML.main();
+                    dbToXML.MultipleChoiceQueryToXML.main();
+                    dbToXML.ShortAnswerQueryToXML.main();
+
+                    dbToXML.Main.main(ids, jTextFieldNomeQuizManual.getText());
+
+                }
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,9 +493,18 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
                 .addComponent(tituloQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(440, 440, 440))
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jPanelQuizManual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,11 +515,18 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(tituloQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(botaoMenuPrincipalQuizManual, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldNomeQuizManual, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                .addGap(57, 57, 57)
-                .addComponent(jPanelQuizManual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(254, 254, 254))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldNomeQuizManual, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -160,7 +537,7 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
        JFrameMenuPrincipal jf1 = new JFrameMenuPrincipal();
         jf1.show(); //display JFrameMenuQuizManual
         
-        dispose(); //fechar o frame atual        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_botaoMenuPrincipalQuizManualActionPerformed
 
     private void jTextFieldNomeQuizManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeQuizManualActionPerformed
@@ -198,20 +575,30 @@ public class JFrameMenuQuizManual extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameMenuQuizManual().setVisible(true);
+                try {
+                    new JFrameMenuQuizManual().setVisible(true);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField NPerguntas;
-    private javax.swing.JButton botaoAddPerguntaQuizManual;
     private javax.swing.JButton botaoMenuPrincipalQuizManual;
-    private javax.swing.JButton botaoRemoverUltimaPergunta;
-    private javax.swing.JButton botaoSubmitNPerguntas;
-    private javax.swing.JLabel jLabelAddPerguntaQuizManual;
-    private javax.swing.JLabel jLabelRemovePerguntaQuizManual;
-    private javax.swing.JPanel jPanelQuizManual1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxCadeiraLista;
+    private javax.swing.JComboBox<String> jComboBoxTemaLista;
+    private javax.swing.JComboBox<String> jComboBoxTipoPerguntaLista;
+    private javax.swing.JLabel jLabelCadeiraLista;
+    private javax.swing.JLabel jLabelCadeiraLista1;
+    private javax.swing.JLabel jLabelCadeiraLista2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldNomeQuizManual;
     private javax.swing.JLabel tituloQuizManual;
     // End of variables declaration//GEN-END:variables

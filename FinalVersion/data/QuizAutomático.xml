@@ -1,0 +1,83 @@
+<quiz>
+<question type="multichoice">
+  <name>
+    <text>Question 158</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[Perguntaa]]></text>
+  </questiontext>
+  <answer fraction="100.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Correct!</text>
+    </feedback>
+  </answer>
+  <answer fraction="0.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Incorrect!</text>
+    </feedback>
+  </answer>
+</question>
+
+<question type="essay">
+  <name>
+    <text>Question 154</text>
+  </name>
+  <questiontext format="html">
+    <text>Perguntaa</text>
+  </questiontext>
+</question>
+
+<question type="multichoice">
+  <name>
+    <text>Question 157</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[Perguntaa]]></text>
+  </questiontext>
+  <answer fraction="100.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Correct!</text>
+    </feedback>
+  </answer>
+  <answer fraction="0.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Incorrect!</text>
+    </feedback>
+  </answer>
+</question>
+
+<question type="essay">
+  <name>
+    <text>Question 164</text>
+  </name>
+  <questiontext format="html">
+    <text>Teste?</text>
+  </questiontext>
+</question>
+
+<question type="multichoice">
+  <name>
+    <text>Question 159</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[Perguntaa]]></text>
+  </questiontext>
+  <answer fraction="100.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Correct!</text>
+    </feedback>
+  </answer>
+  <answer fraction="0.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Incorrect!</text>
+    </feedback>
+  </answer>
+</question>
+
+</quiz>

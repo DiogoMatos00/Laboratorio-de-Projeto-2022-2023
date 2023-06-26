@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author vasco
@@ -13,9 +17,13 @@ public class RespostaCurta extends javax.swing.JFrame {
     /**
      * Creates new form RespostaCurta
      */
-    public RespostaCurta() {
-        initComponents();
+    public RespostaCurta(String subject, String topic) {
+        initComponents(subject, topic);
         setDefaultCloseOperation(RespostaCurta.DISPOSE_ON_CLOSE);
+    }
+
+    public RespostaCurta() {
+
     }
 
     /**
@@ -25,9 +33,8 @@ public class RespostaCurta extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String subject, String topic) {
 
-        jTextFieldNomePerguntaCurta = new javax.swing.JTextField();
         jTextFieldRespostaPerguntaCurta = new javax.swing.JTextField();
         jButtonSubmeterPerguntaCurta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -35,16 +42,48 @@ public class RespostaCurta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextFieldNomePerguntaCurta.setText("Título");
-        jTextFieldNomePerguntaCurta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomePerguntaCurtaActionPerformed(evt);
-            }
-        });
-
         jTextFieldRespostaPerguntaCurta.setText("Resposta");
 
         jButtonSubmeterPerguntaCurta.setText("Submeter");
+        jButtonSubmeterPerguntaCurta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(!(jTextArea1.getText().equals("Pergunta") || jTextArea1.getText().equals("") || jTextFieldRespostaPerguntaCurta.getText().equals("") || jTextFieldRespostaPerguntaCurta.getText().equals("Resposta"))){
+                    String topicid = null;
+                    try {
+                        topicid = listagem_de_perguntas.getTopicIdwithSubjectandtopic(subject, topic);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Resposta Curta', '%s');", jTextArea1.getText().toString(), topicid);
+                    String id;
+
+                    try {
+                        listagem_de_perguntas.addQuestion(query);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    try {
+                        id = listagem_de_perguntas.maxid();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    String queryShort = String.format("INSERT INTO ShortAnswer VALUES ('%s', '%s');",jTextFieldRespostaPerguntaCurta.getText(), id);
+
+                    try {
+                        listagem_de_perguntas.addQuestion(queryShort);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    dispose();
+                }
+
+                }
+            }
+        );
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -56,39 +95,32 @@ public class RespostaCurta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButtonSubmeterPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldNomePerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(258, 258, 258))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(456, 456, 456)
+                        .addComponent(jButtonSubmeterPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jTextFieldNomePerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jTextFieldRespostaPerguntaCurta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jButtonSubmeterPerguntaCurta)
-                .addGap(30, 30, 30))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldNomePerguntaCurtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomePerguntaCurtaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomePerguntaCurtaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,7 +162,6 @@ public class RespostaCurta extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSubmeterPerguntaCurta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextFieldNomePerguntaCurta;
     private javax.swing.JTextField jTextFieldRespostaPerguntaCurta;
     // End of variables declaration//GEN-END:variables
 }

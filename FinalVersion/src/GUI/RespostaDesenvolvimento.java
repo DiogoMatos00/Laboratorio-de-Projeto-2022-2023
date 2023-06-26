@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author vasco
@@ -13,9 +17,13 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
     /**
      * Creates new form Desenvolvimento
      */
-    public RespostaDesenvolvimento() {
-        initComponents();
+    public RespostaDesenvolvimento(String subject, String topic) {
+        initComponents(subject, topic);
         setDefaultCloseOperation(RespostaDesenvolvimento.DISPOSE_ON_CLOSE);
+    }
+
+    public RespostaDesenvolvimento() {
+
     }
 
     /**
@@ -25,9 +33,8 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String subject, String topic) {
 
-        jTextFieldNomePerguntaDesenvolvimento = new javax.swing.JTextField();
         botaoSubmeterPerguntaDesenvolvimento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -36,9 +43,45 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextFieldNomePerguntaDesenvolvimento.setText("Título");
-
         botaoSubmeterPerguntaDesenvolvimento.setText("Submeter");
+        botaoSubmeterPerguntaDesenvolvimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(!(jTextArea1.getText().equals("Pergunta") || jTextArea1.getText().equals(""))){
+                    String topicid = null;
+                    try {
+                        topicid = listagem_de_perguntas.getTopicIdwithSubjectandtopic(subject, topic);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Desenvolvimento', '%s');", jTextArea1.getText().toString(), topicid);
+                    String id;
+
+                    try {
+                        listagem_de_perguntas.addQuestion(query);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    try {
+                        id = listagem_de_perguntas.maxid();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    String queryShort = String.format("INSERT INTO DEVELOPMENT  VALUES ('%s', '%s');", jTextArea2.getText(), id);
+
+                    try {
+                        listagem_de_perguntas.addQuestion(queryShort);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    dispose();
+                }
+
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -57,25 +100,22 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botaoSubmeterPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldNomePerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2)))
+                        .addComponent(jScrollPane2))
+                    .addComponent(botaoSubmeterPerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jTextFieldNomePerguntaDesenvolvimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(29, 29, 29)
                 .addComponent(botaoSubmeterPerguntaDesenvolvimento)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,6 +164,5 @@ public class RespostaDesenvolvimento extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextFieldNomePerguntaDesenvolvimento;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,15 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  *
  * @author vasco
@@ -13,7 +22,7 @@ public class JFrameListaUC extends javax.swing.JFrame {
     /**
      * Creates new form JFrameListaUC
      */
-    public JFrameListaUC() {
+    public JFrameListaUC() throws SQLException {
         initComponents();
         setDefaultCloseOperation(JFrameAddPergunta.DISPOSE_ON_CLOSE);
     }
@@ -25,31 +34,91 @@ public class JFrameListaUC extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws SQLException {
 
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabelListaUC = new javax.swing.JLabel();
+        jScrollPaneListaUC = new javax.swing.JScrollPane();
+        botaoAdicionarUC = new javax.swing.JButton();
+        botaoApagarUC = new javax.swing.JButton();
+        botaoBack = new javax.swing.JButton();
+
+
+        jTable1 = new JTable();
+        DefaultTableModel dtm = new DefaultTableModel(0,0){
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;//This causes all cells to be not editable
+            }
+        };
+
+        String header[] = new String[] {"ID", "Unidade Curricular"};
+
+        dtm.setColumnIdentifiers(header);
+        jTable1.setModel(dtm);
+
+        List<List<String>> uc = listagem_de_perguntas.getSubjectsandId();
+        for(int i = 0; i < uc.size(); i++){
+            List<String> a = uc.get(i);
+            dtm.addRow(new Object[]{a.get(0), a.get(1)});
+        }
+
+        jTable1.getTableHeader().setResizingAllowed(false);
+        TableColumn column1 = jTable1.getColumnModel().getColumn(0);
+        column1.setPreferredWidth(30);
+        TableColumn column2 = jTable1.getColumnModel().getColumn(1);
+        column2.setPreferredWidth(300);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPaneListaUC.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Lista de Unidades Curriculares");
+        jLabelListaUC.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabelListaUC.setText("Lista de Unidades Curriculares");
 
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+
+         jTable1.getTableHeader().setReorderingAllowed(false); 
+        jScrollPaneListaUC.setViewportView(jTable1);
+
+        
+
+
+
+
+        jTable1.getTableHeader().setReorderingAllowed(false); 
+
+
+
+        botaoAdicionarUC.setText("Adicionar");
+        botaoAdicionarUC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoAdicionarUCActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Apagar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoApagarUC.setText("Apagar");
+        botaoApagarUC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                if(jTable1.isRowSelected(jTable1.getSelectedRow())) {
+                    String id = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+                    botaoApagarUCActionPerformed(evt, id);
+                }
             }
         });
+
+        botaoBack.setText("Back");
+        botaoBack.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                JFrameMenuListarPerguntas jf0;
+                try {
+                    jf0 = new JFrameMenuListarPerguntas ();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                jf0.show(); //display
+                dispose();
+            }
+        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,45 +126,57 @@ public class JFrameListaUC extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addComponent(jLabel1)
+                .addComponent(jLabelListaUC)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPaneListaUC, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoAdicionarUC, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botaoBack)
+                        .addGap(93, 93, 93)
+                        .addComponent(botaoApagarUC, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jLabel1)
+                .addComponent(jLabelListaUC)
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneListaUC, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botaoAdicionarUC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoApagarUC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
+
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoAdicionarUCActionPerformed(ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarUCActionPerformed
         // TODO add your handling code here:
-        JFramePopupConfirmarUC jf1 = new JFramePopupConfirmarUC();
-        jf1.show(); //display JFrameMenuQuizManual
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFramePopupAdicionarUC jf1 = new JFramePopupAdicionarUC();
+        jf1.show(); //display JFrameMenuListarPerguntas
+
+        dispose(); //fechar o frame atual
+        
+    }//GEN-LAST:event_botaoAdicionarUCActionPerformed
+
+    private void botaoApagarUCActionPerformed(java.awt.event.ActionEvent evt, String id) {//GEN-FIRST:event_botaoApagarUCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+           JFramePopupConfirmarUC jf1 = new JFramePopupConfirmarUC(id);
+           jf1.show(); //display JFrameMenuQuizManual
+           dispose();
+    }//GEN-LAST:event_botaoApagarUCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,15 +208,21 @@ public class JFrameListaUC extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameListaUC().setVisible(true);
+                try {
+                    new JFrameListaUC().setVisible(true);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton botaoAdicionarUC;
+    private javax.swing.JButton botaoApagarUC;
+    private javax.swing.JLabel jLabelListaUC;
+    private javax.swing.JScrollPane jScrollPaneListaUC;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton botaoBack;
     // End of variables declaration//GEN-END:variables
 }

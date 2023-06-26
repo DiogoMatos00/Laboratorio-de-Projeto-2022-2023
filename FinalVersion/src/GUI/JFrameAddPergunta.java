@@ -45,8 +45,8 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 
-        jComboBoxTemaPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
-        jComboBoxTemaPergunta.setSelectedIndex(-1);
+        jComboBoxTemaPergunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Escolha uma opção"}));
+        jComboBoxTemaPergunta.setSelectedIndex(0);
         jComboBoxTemaPergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTemaPerguntaActionPerformed(evt);
@@ -78,14 +78,14 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
                 String subject = (String) jComboBoxUCPergunta.getSelectedItem();
                 List<String> topic = new ArrayList<String>();
 
+                jComboBoxTemaPergunta.addItem("Escolha uma opção");
+
 
                 try {
                     topic = listagem_de_perguntas.getTopic(subject);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
-                topic.add(0, "Escolha uma opção");
 
                 for(int i = 0; i<topic.size(); i++) {
                     jComboBoxTemaPergunta.addItem(topic.get(i));
@@ -106,12 +106,20 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
 
         jLabelTipoPerguntaPergunta.setText("Tipo de Pergunta");
 
+
+
         botaoSubmitPergunta.setText("Submit");
         botaoSubmitPergunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSubmitPerguntaActionPerformed(evt);
+                if(!jComboBoxTemaPergunta.getSelectedItem().toString().equals("Escolha uma opção") && !jComboBoxTipoPerguntaPergunta.getSelectedItem().toString().equals("Escolha uma opção")){
+                    botaoSubmitPerguntaActionPerformed(evt);
+
+                }
+
             }
         });
+
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,28 +185,38 @@ public class JFrameAddPergunta extends javax.swing.JFrame {
         // TODO add your handling code here:
         int combobox1 =jComboBoxTipoPerguntaPergunta.getSelectedIndex();
     
-    if(0 == combobox1){
-        RespostaEscolhaMultipla jf4 = new RespostaEscolhaMultipla();
+    if(combobox1 == 1){
+        String subject = jComboBoxUCPergunta.getSelectedItem().toString();
+        String topic = jComboBoxTemaPergunta.getSelectedItem().toString();
+        RespostaEscolhaMultipla jf4 = new RespostaEscolhaMultipla(subject, topic);
         jf4.show();
         dispose();
         
-    }else if(combobox1 == 1){
-        RespostaDesenvolvimento jf5 = new RespostaDesenvolvimento();
+    }else if(combobox1 == 2){
+        String subject = jComboBoxUCPergunta.getSelectedItem().toString();
+        String topic = jComboBoxTemaPergunta.getSelectedItem().toString();
+        RespostaDesenvolvimento jf5 = new RespostaDesenvolvimento(subject, topic);
         jf5.show();
         dispose();
         
-    }else if(combobox1 == 2){
-        RespostaCurta jf6 = new RespostaCurta();
+    }else if(combobox1 == 3){
+        String subject = jComboBoxUCPergunta.getSelectedItem().toString();
+        String topic = jComboBoxTemaPergunta.getSelectedItem().toString();
+        RespostaCurta jf6 = new RespostaCurta(subject, topic);
         jf6.show();
         dispose();
         
-    }else if(combobox1 == 3){
+    }else if(combobox1 == 4){
+        String subject = jComboBoxUCPergunta.getSelectedItem().toString();
+        String topic = jComboBoxTemaPergunta.getSelectedItem().toString();
         RespostaCalculada jf7 = new RespostaCalculada();
         jf7.show();
         dispose();
         
-    }else if(combobox1 == 4){
-        RespostaCorrespondencia jf8 = new RespostaCorrespondencia();
+    }else if(combobox1 == 5){
+        String subject = jComboBoxUCPergunta.getSelectedItem().toString();
+        String topic = jComboBoxTemaPergunta.getSelectedItem().toString();
+        RespostaCorrespondencia jf8 = new RespostaCorrespondencia(subject, topic);
         jf8.show();
         dispose();}
     }//GEN-LAST:event_botaoSubmitPerguntaActionPerformed

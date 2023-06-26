@@ -4,6 +4,11 @@
  */
 package GUI;
 
+import Controller.listagem_de_perguntas;
+import com.sun.source.doctree.StartElementTree;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author vasco
@@ -13,13 +18,16 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
     /**
      * Creates new form EscolhaMultipla
      */
-    public RespostaEscolhaMultipla() {
-        System.out.println("nao");
-        
-        initComponents();
+    public RespostaEscolhaMultipla(String subject, String topic) {
+
+        initComponents(subject, topic);
         setDefaultCloseOperation(RespostaEscolhaMultipla.DISPOSE_ON_CLOSE);
     }
-    
+
+    public RespostaEscolhaMultipla() {
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,48 +36,162 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String subject, String topic) {
 
-        jTextFieldNomePerguntaEM = new javax.swing.JTextField();
         botaoSubmeterPerguntaEM = new javax.swing.JButton();
-        jCheckBoxResposta2PerguntaEM = new javax.swing.JCheckBox();
-        jCheckBoxResposta4PerguntaEM = new javax.swing.JCheckBox();
-        jCheckBoxResposta3PerguntaEM = new javax.swing.JCheckBox();
         jCheckBoxResposta1PerguntaEM = new javax.swing.JCheckBox();
-        jCheckBoxResposta4PerguntaEM1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jCheckBoxResposta1PerguntaEM1 = new javax.swing.JCheckBox();
+        jTextField3 = new javax.swing.JTextField();
+        jCheckBoxResposta1PerguntaEM2 = new javax.swing.JCheckBox();
+        jTextField5 = new javax.swing.JTextField();
+        jCheckBoxResposta1PerguntaEM4 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextFieldNomePerguntaEM.setText("Título");
-
         botaoSubmeterPerguntaEM.setText("Submeter");
-
-        jCheckBoxResposta2PerguntaEM.setText("Resposta 2");
-        jCheckBoxResposta2PerguntaEM.addActionListener(new java.awt.event.ActionListener() {
+        botaoSubmeterPerguntaEM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxResposta2PerguntaEMActionPerformed(evt);
+                if(!(jTextArea1.getText().equals("Pergunta") || jTextArea1.getText().equals("") || jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField5.getText().equals(""))){
+                    String topicid = null;
+                    try {
+                        topicid = listagem_de_perguntas.getTopicIdwithSubjectandtopic(subject, topic);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    int selectedCount = 0;
+                    if(jCheckBoxResposta1PerguntaEM.isSelected()){
+                        selectedCount++;
+                    }
+                    if(jCheckBoxResposta1PerguntaEM1.isSelected()){
+                        selectedCount++;
+                    }
+                    if(jCheckBoxResposta1PerguntaEM2.isSelected()){
+                        selectedCount++;
+                    }
+                    if(jCheckBoxResposta1PerguntaEM4.isSelected()){
+                        selectedCount++;
+                    }
+
+                    if(selectedCount == 1){
+                        String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Escolha múltipla', '%s');", jTextArea1.getText().toString(), topicid);
+                        String id;
+
+                        try {
+                            listagem_de_perguntas.addQuestion(query);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            id = listagem_de_perguntas.maxid();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, false, %s);",jTextField1.getText(), jCheckBoxResposta1PerguntaEM.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, false, %s);",jTextField2.getText(), jCheckBoxResposta1PerguntaEM1.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, false, %s);",jTextField3.getText(), jCheckBoxResposta1PerguntaEM2.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, false, %s);",jTextField5.getText(), jCheckBoxResposta1PerguntaEM4.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        dispose();
+                    } else if(selectedCount > 1){
+                        String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Múltipla escolha', '%s');", jTextArea1.getText().toString(), topicid);
+                        String id;
+
+                        try {
+                            listagem_de_perguntas.addQuestion(query);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            id = listagem_de_perguntas.maxid();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, true, %s);",jTextField1.getText(), jCheckBoxResposta1PerguntaEM.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, true, %s);",jTextField2.getText(), jCheckBoxResposta1PerguntaEM1.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, true, %s);",jTextField3.getText(), jCheckBoxResposta1PerguntaEM2.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        try {
+                            listagem_de_perguntas.addQuestion(String.format("INSERT INTO MultipleChoice VALUES ('%s', %b, true, %s);",jTextField5.getText(), jCheckBoxResposta1PerguntaEM4.isSelected(), id));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        dispose();
+                    }
+
+                }
+
             }
         });
 
-        jCheckBoxResposta4PerguntaEM.setText("Resposta 5");
-
-        jCheckBoxResposta3PerguntaEM.setText("Resposta 3");
-
-        jCheckBoxResposta1PerguntaEM.setText("Resposta 1");
         jCheckBoxResposta1PerguntaEM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxResposta1PerguntaEMActionPerformed(evt);
             }
         });
 
-        jCheckBoxResposta4PerguntaEM1.setText("Resposta 4");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Pergunta");
         jScrollPane1.setViewportView(jTextArea1);
+
+        jCheckBoxResposta1PerguntaEM1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxResposta1PerguntaEM1ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxResposta1PerguntaEM2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxResposta1PerguntaEM2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxResposta1PerguntaEM4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxResposta1PerguntaEM4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,55 +200,85 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldNomePerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jCheckBoxResposta4PerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(357, 357, 357)
-                            .addComponent(botaoSubmeterPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jCheckBoxResposta3PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBoxResposta1PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBoxResposta2PerguntaEM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBoxResposta4PerguntaEM1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBoxResposta1PerguntaEM4)
+                                .addGap(7, 7, 7)
+                                .addComponent(jTextField5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jCheckBoxResposta1PerguntaEM1)
+                                .addGap(7, 7, 7)
+                                .addComponent(jTextField2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jCheckBoxResposta1PerguntaEM)
+                                .addGap(7, 7, 7)
+                                .addComponent(jTextField1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jCheckBoxResposta1PerguntaEM2)
+                                .addGap(7, 7, 7)
+                                .addComponent(jTextField3)))
+                        .addGap(235, 235, 235)
+                        .addComponent(botaoSubmeterPerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jTextFieldNomePerguntaEM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxResposta1PerguntaEM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxResposta2PerguntaEM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxResposta3PerguntaEM)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(botaoSubmeterPerguntaEM))
+                        .addGap(19, 19, 19)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBoxResposta4PerguntaEM1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBoxResposta4PerguntaEM)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jCheckBoxResposta1PerguntaEM)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jCheckBoxResposta1PerguntaEM1)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jCheckBoxResposta1PerguntaEM2)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jCheckBoxResposta1PerguntaEM4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoSubmeterPerguntaEM)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBoxResposta2PerguntaEMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta2PerguntaEMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxResposta2PerguntaEMActionPerformed
-
     private void jCheckBoxResposta1PerguntaEMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta1PerguntaEMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxResposta1PerguntaEMActionPerformed
+
+    private void jCheckBoxResposta1PerguntaEM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta1PerguntaEM1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxResposta1PerguntaEM1ActionPerformed
+
+    private void jCheckBoxResposta1PerguntaEM2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta1PerguntaEM2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxResposta1PerguntaEM2ActionPerformed
+
+    private void jCheckBoxResposta1PerguntaEM4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxResposta1PerguntaEM4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxResposta1PerguntaEM4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,12 +319,14 @@ public class RespostaEscolhaMultipla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoSubmeterPerguntaEM;
     private javax.swing.JCheckBox jCheckBoxResposta1PerguntaEM;
-    private javax.swing.JCheckBox jCheckBoxResposta2PerguntaEM;
-    private javax.swing.JCheckBox jCheckBoxResposta3PerguntaEM;
-    private javax.swing.JCheckBox jCheckBoxResposta4PerguntaEM;
-    private javax.swing.JCheckBox jCheckBoxResposta4PerguntaEM1;
+    private javax.swing.JCheckBox jCheckBoxResposta1PerguntaEM1;
+    private javax.swing.JCheckBox jCheckBoxResposta1PerguntaEM2;
+    private javax.swing.JCheckBox jCheckBoxResposta1PerguntaEM4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextFieldNomePerguntaEM;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
