@@ -1,0 +1,19 @@
+<queries><query><questionId>161</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>161</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>163</questionId><description>Quantas destas opções estão certas</description><answer>Opção A</answer><val>1</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>163</questionId><description>Quantas destas opções estão certas</description><answer>Opção B</answer><val>1</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>163</questionId><description>Quantas destas opções estão certas</description><answer>Opção C</answer><val>1</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>163</questionId><description>Quantas destas opções estão certas</description><answer>Opção D</answer><val>0</val><trueOrFalse>1</trueOrFalse></query>
+<query><questionId>3</questionId><description>A posição de um robô em um sistema de coordenadas é geralmente expressa como um vetor tridimensional que representa sua localização no espaço.</description><answer>a) Aumentar a velocidade da conexão de rede. </answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>4</questionId><description>A matriz de rotação é uma forma comum de representar a orientação de um robô no espaço tridimensional.</description><answer>TESTE</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>156</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>156</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>157</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>157</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>158</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>158</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>159</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>159</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>160</questionId><description>Perguntaa</description><answer>a</answer><val>1</val><trueOrFalse>0</trueOrFalse></query>
+<query><questionId>160</questionId><description>Perguntaa</description><answer>a</answer><val>0</val><trueOrFalse>0</trueOrFalse></query>
+</queries>

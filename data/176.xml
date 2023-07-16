@@ -1,0 +1,32 @@
+<quiz><question type="matching">
+  <name>
+    <text>Question 176</text>
+  </name>
+  <questiontext format="html">
+    <text>AAAAAAAAAAAAA BB1</text>
+  </questiontext>
+  <subquestion format="html">
+    <text>1</text>
+    <answer>
+      <text>1</text>
+    </answer>
+  </subquestion>
+  <subquestion format="html">
+    <text>1</text>
+    <answer>
+      <text>1</text>
+    </answer>
+  </subquestion>
+  <subquestion format="html">
+    <text>1</text>
+    <answer>
+      <text>1</text>
+    </answer>
+  </subquestion>
+  <subquestion format="html">
+    <text>1</text>
+    <answer>
+      <text>1</text>
+    </answer>
+  </subquestion>
+</question></quiz>

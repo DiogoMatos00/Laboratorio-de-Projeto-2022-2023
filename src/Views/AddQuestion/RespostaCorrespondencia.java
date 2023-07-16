@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
+package Views.AddQuestion;
 
 import Controller.listagem_de_perguntas;
 
@@ -90,7 +90,7 @@ public class RespostaCorrespondencia extends javax.swing.JFrame {
                         throw new RuntimeException(e);
                     }
 
-                    String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Correspondência de Colunas', '%s');", jTextArea1.getText().toString(), topicid);
+                    String query = String.format("INSERT INTO QUESTION (description, type, topicid) VALUES ('%s', 'Correspondência', '%s');", jTextArea1.getText().toString(), topicid);
                     String id;
 
                     try {

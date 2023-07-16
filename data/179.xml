@@ -1,0 +1,32 @@
+<quiz><question type="multichoice">
+  <name>
+    <text>Question 179</text>
+  </name>
+  <questiontext format="html">
+    <text><![CDATA[João]]></text>
+  </questiontext>
+  <answer fraction="0.0">
+    <text><![CDATA[a]]></text>
+    <feedback>
+      <text>Incorrect!</text>
+    </feedback>
+  </answer>
+  <answer fraction="50.0">
+    <text><![CDATA[b]]></text>
+    <feedback>
+      <text>Correct!</text>
+    </feedback>
+  </answer>
+  <answer fraction="50.0">
+    <text><![CDATA[c]]></text>
+    <feedback>
+      <text>Correct!</text>
+    </feedback>
+  </answer>
+  <answer fraction="0.0">
+    <text><![CDATA[d]]></text>
+    <feedback>
+      <text>Incorrect!</text>
+    </feedback>
+  </answer>
+</question></quiz>
